@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather API</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+			$(document).ready(function(){
+				var dateTime = new Date();
+				var currentEpoch = dateTime.getTime(); //http://en.wikipedia.org/wiki/Unix_time
+				//set up an empty api object to store all of your information in
+				var api = {};
+				//set specific properties
+				var userstate=prompt("What state do you want to look up?")
+				var usercity=prompt("What city do you want to look up?");
+					api.key = "";
+					api.state = userstate;
+					api.city = usercity;
+				//use string concatenation to create the full url
+				//http://api.wunderground.com/api/asdfadsf1234/hourly/q/NY/Brooklyn.json
+					// api.hourly = "http://api.wunderground.com/api/"+api.key+"/hourly/q/"+api.state+"/"+api.city+".json";
+					api.conditions = "http://cooper-union-weather-proxy.herokuapp.com/weather/"+api.state+"/"+api.city;
+				//take a look at the object by using console.log(api)
+				console.log(api);
+				//Request data remotely from the api
+				//note that the url parameter uses one of the urls stored in the api object
+				$.ajax({
+				  type: 'GET',
+				  dataType: 'json',
+				  url: api.conditions,
+				  success: function(response){
+				  	//here's where all of your fun code goes!
+						//the variable "response" is now a json object containing all of your results
+						console.log(response);
+						//example of outputting the current temp
+						$('#temperature').append(response.current_observation.feelslike_f + " degrees f");
+
+						var whenTempWasTaken = parseInt(currentEpoch/1000) - parseInt(response.current_observation.observation_epoch);
+						console.log("Temperature reading is " + whenTempWasTaken + " seconds old.");
+						$('#magic').append("It is currently " + "<span>" + response.current_observation.display_location.magic + " &deg;</span> Magic");
+						var imageTag = response.current_observation.icon_url;
+						$("#magic").click(function() {
+							$('#magic').html(response.current_observation.feelslike_f + " degrees f");
+          	$("#magic").css("background-image", 'url(' + imageTag + ')');
+							$("#magic").css("color", 'red');
+						  });
+				  }
+				});
+
+				$("#magic").click(function() {
+					$("#temperature").toggleClass("hide");
+				  });
+			});
+		</script>
+
+
+	</head>
+	<body>
+		<h1 id="output">What's the weather like today?</h1>
+
+
+		<section>
+			<div class="background" id="magic"></div>
+
+	</section>
+	</body>
+</html>

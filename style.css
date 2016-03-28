@@ -1,0 +1,40 @@
+*{
+font-family:helvetica, sans-serif;
+background-color: black;
+color: white;
+}
+section{
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+}
+span{
+  color: red;
+}
+body{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#magic{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+
+  margin: auto;
+  position:absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index: 0;
+}
+
+.background{
+  background-image: url("http://rs123.pbsrc.com/albums/o285/jane_doe_102/BACKGROUND%20IMAGES/nightsky.gif~c200");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
