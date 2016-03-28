@@ -40,7 +40,7 @@
 						$('#magic').append("It is currently " + "<span>" + response.current_observation.display_location.magic + " &deg;</span> Magic");
 						var imageTag = response.current_observation.icon_url;
 						$("#magic").click(function() {
-							$('#magic').html(response.current_observation.feelslike_f + " degrees f");
+							$('#magic').html(response.current_observation.feelslike_f + " &deg; F");
           	$("#magic").css("background-image", 'url(' + imageTag + ')');
 							$("#magic").css("color", 'red');
 						  });
