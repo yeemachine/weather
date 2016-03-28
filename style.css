@@ -2,6 +2,7 @@
 font-family:helvetica, sans-serif;
 background-color: black;
 color: white;
+text-shadow: 10px 10px 8px #ff0000;
 }
 section{
   display:flex;
